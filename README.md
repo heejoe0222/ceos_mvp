@@ -1,6 +1,7 @@
 # branch rule
 - 반드시 새 branch에서 작업하고, pull request를 통해 merge하도록 합니다.
 - PR시에는 운영진에게 review 받도록 합니다.
+- 절대로 master branch에 직접 commit하지 않습니다.
 
 # task
 1. MVP 테스트를 위한 one-page 사이트를 만듭니다. \
