@@ -19,11 +19,12 @@ ALLOWED_HOSTS = envs['ALLOWED_HOSTS']
 env.user = REMOTE_USER
 username = env.user
 env.hosts = [REMOTE_HOST_SSH, ]
-env.key_filename = ["~/.ssh/ceos_developers.pem",]
+env.key_filename = ["~/.ssh/ceos_developers.pem", ]
 
 virtualenv_folder = '/home/{}/.pyenv/versions/production'.format(env.user)
 project_folder = '/home/{}/srv/{}'.format(env.user, PROJECT_NAME)
 appname = 'core'
+
 
 def _get_latest_source():
     print("_get_latest_source")
@@ -39,7 +40,8 @@ def _update_settings():
     print("_update_settings")
     settings_path = project_folder + '/{}/settings.py'.format(PROJECT_NAME)
     sed(settings_path, "DEBUG = True", "DEBUG = False")
-    sed(settings_path, 'ALLOWED_HOSTS = .+$', 'ALLOWED_HOSTS = [%s]' % ','.join(['\"%s\"' % host for host in ALLOWED_HOSTS]))
+    sed(settings_path, 'ALLOWED_HOSTS = .+$',
+        'ALLOWED_HOSTS = [%s]' % ','.join(['\"%s\"' % host for host in ALLOWED_HOSTS]))
     sed(settings_path, 'STATIC_ROOT = .+$', 'STATIC_ROOT = "/var/www/product.hanqyu.com/static/"')
 
 
@@ -74,6 +76,11 @@ def _update_database():
     ))
 
 
+def _grant_uwsgi():
+    print('_grant_uwsgi')
+    sudo('sudo chown -R :deploy {}'.format(project_folder))
+
+
 def _grant_sqlite3():
     print("_grant_sqlite3")
     sudo('sudo chmod 775 {}/db.sqlite3'.format(project_folder))
@@ -99,6 +106,7 @@ def deploy():
     _update_virtualenv()
     _update_static_files()
     _update_database()
+    _grant_uwsgi()
     _grant_sqlite3()
     _restart_uwsgi()
     _restart_nginx()
