@@ -137,7 +137,7 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'console_debug_false', 'mail_admins'],
+            'handlers': ['console', 'console_debug_false'],
             'level': 'INFO',
         },
         'django.server': {
