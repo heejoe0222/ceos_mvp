@@ -1,0 +1,6 @@
+
+.idea/
+ceos_mvp/__pycache__/
+ceos_mvp/secrets.json
+core/__pycache__/
+core/migrations/
