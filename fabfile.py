@@ -26,6 +26,7 @@ project_folder = '/home/{}/srv/{}'.format(env.user, PROJECT_NAME)
 
 
 def _get_latest_source():
+    print("_get_latest_source")
     if exists(project_folder + '/.git'):
         run('cd %s && git fetch' % (project_folder,))
     else:
@@ -35,24 +36,28 @@ def _get_latest_source():
 
 
 def _update_settings():
+    print("_update_settings")
     settings_path = project_folder + '/{}/settings.py'.format(PROJECT_NAME)
     sed(settings_path, "DEBUG = True", "DEBUG = False")
-    sed(settings_path, 'ALLOWED_HOSTS = .+$', 'ALLOWED_HOSTS = [%s]' % ','.join(['\"host\"' for host in ALLOWED_HOSTS]))
+    sed(settings_path, 'ALLOWED_HOSTS = .+$', 'ALLOWED_HOSTS = [%s]' % ','.join(['\"%s\"' % host for host in ALLOWED_HOSTS]))
 
 
 def _update_virtualenv():
+    print("_update_virtualenv")
     run('%s/bin/pip install -r %s/requirements.txt' % (
         virtualenv_folder, project_folder
     ))
 
 
 def _update_static_files():
+    print("_update_static_files")
     run('cd %s && %s/bin/python3 manage.py collectstatic --noinput' % (
         project_folder, virtualenv_folder
     ))
 
 
 def _update_database():
+    print("_update_database")
     run('cd %s && %s/bin/python3 manage.py makemigrations --noinput' % (
         project_folder, virtualenv_folder
     ))
@@ -62,16 +67,19 @@ def _update_database():
 
 
 def _grant_sqlite3():
+    print("_grant_sqlite3")
     sudo('sudo chmod 775 {}/db.sqlite3'.format(project_folder))
 
 
 def _restart_uwsgi():
+    print("_restart_uwsgi")
     sudo('sudo cp -f {}/.config/uwsgi.service /etc/systemd/system/uwsgi.service'.format(project_folder))
     sudo('sudo systemctl daemon-reload')
     sudo('sudo systemctl restart uwsgi')
 
 
 def _restart_nginx():
+    print("_restart_nginx")
     sudo('sudo cp -f {}/.config/nginx.conf /etc/nginx/sites-available/ceos_mvp.conf'.format(project_folder))
     sudo('sudo ln -sf /etc/nginx/sites-available/ceos_mvp.conf /etc/nginx/sites-enabled/mysite.conf')
     sudo('sudo systemctl restart nginx')
