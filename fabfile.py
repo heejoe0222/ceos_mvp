@@ -23,7 +23,7 @@ env.key_filename = ["~/.ssh/ceos_developers.pem",]
 
 virtualenv_folder = '/home/{}/.pyenv/versions/production'.format(env.user)
 project_folder = '/home/{}/srv/{}'.format(env.user, PROJECT_NAME)
-
+appname = 'core'
 
 def _get_latest_source():
     print("_get_latest_source")
@@ -40,6 +40,7 @@ def _update_settings():
     settings_path = project_folder + '/{}/settings.py'.format(PROJECT_NAME)
     sed(settings_path, "DEBUG = True", "DEBUG = False")
     sed(settings_path, 'ALLOWED_HOSTS = .+$', 'ALLOWED_HOSTS = [%s]' % ','.join(['\"%s\"' % host for host in ALLOWED_HOSTS]))
+    sed(settings_path, 'STATIC_ROOT = .+$', 'STATIC_ROOT = "/var/www/product.hanqyu.com/static/"')
 
 
 def _update_virtualenv():
@@ -51,6 +52,7 @@ def _update_virtualenv():
 
 def _update_static_files():
     print("_update_static_files")
+
     run('cd %s && %s/bin/python3 manage.py collectstatic --noinput' % (
         project_folder, virtualenv_folder
     ))
@@ -63,6 +65,12 @@ def _update_database():
     ))
     run('cd %s && %s/bin/python3 manage.py migrate --noinput' % (
         project_folder, virtualenv_folder
+    ))
+    run('cd %s && %s/bin/python3 manage.py makemigrations %s --noinput' % (
+        project_folder, virtualenv_folder, appname
+    ))
+    run('cd %s && %s/bin/python3 manage.py migrate %s --noinput' % (
+        project_folder, virtualenv_folder, appname
     ))
 
 
