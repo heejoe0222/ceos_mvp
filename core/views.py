@@ -10,7 +10,6 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 def example(request):
     if request.method == 'POST':
         email = request.POST['email']
-        print(not re.match(EMAIL_REGEX, email) is None)
         if email == '' or re.match(EMAIL_REGEX, email) is None:
             messages.error(request, "뭔가 잘못됨! 확인해라, 이메일!")
             return HttpResponseRedirect(request.path)
