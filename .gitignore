@@ -5,3 +5,4 @@ ceos_mvp/secrets.json
 core/__pycache__/
 core/migrations/
 db.sqlite3
+deploy.json
