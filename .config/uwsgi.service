@@ -3,7 +3,7 @@ Description=uWSGI Emperor service
 After=syslog.target
 
 [Service]
-ExecStart=/home/ubuntu/.pyenv/versions/uwsgi-env/bin/uwsgi -i /srv/ceos_mvp/.config/uwsgi.ini
+ExecStart=/home/ubuntu/.pyenv/versions/uwsgi-env/bin/uwsgi -i /home/ubuntu/srv/ceos_mvp/.config/uwsgi.ini
 
 Restart=always
 KillSignal=SIGQUIT
