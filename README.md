@@ -10,7 +10,7 @@
 2. views.py urls.py templates에서 작업하면 됩니다. example을 참고합니다.
 3. 작업 완료 후 master에 merge 되고 나면 `fab deploy` 명령어를 통해 배포합니다.
 4. 작업 결과물은 `~/example` 과 같은 url을 가질 수 있도록 합니다.
-5. 배포 후에는 http://product.hanqyu.com/example에서 확인할 수 있습니다.
+5. 배포 후에는 http://product.hanqyu.com/example 에서 확인할 수 있습니다.
 6. 수집된 이메일은 별도로 전달해드릴 예정입니다.
 
 
