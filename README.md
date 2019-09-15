@@ -13,11 +13,15 @@
 5. 배포 후에는 http://product.hanqyu.com/example 에서 확인할 수 있습니다.
 6. 수집된 이메일은 별도로 전달해드릴 예정입니다.
 
+# 작업시 주의사항
+1. static 파일은 `ceos_mvp/static/core/{서비스명}/{파일명}`에 저장합니다.
+2. templates 파일은 `ceos_mvp/templates/core/{서비스명}/{파일명}`에 저장합니다.
+3. views.py와 urls.py의 함수도 본인의 서비스명을 사용합니다.
+
 
 ### 배포시 필요사항
 - slack에 공유된 deploy.json 파일을 자신의 프로젝트 폴더에 복사
 - ceos_developers.pem 파일을 자신의 `~/.ssh/` 폴더에 복사
-
 
 
 ### git 또는 django 초심자라면
