@@ -19,13 +19,13 @@
 3. views.py와 urls.py의 함수도 본인의 서비스명을 사용합니다.
 
 
-### 배포시 필요사항
+# 배포시 필요사항
 - slack에 공유된 deploy.json 파일을 자신의 프로젝트 폴더에 복사
 - ceos_developers.pem 파일을 자신의 `~/.ssh/` 폴더에 복사
 
 
-### git 또는 django 초심자라면
+# git 또는 django 초심자라면
 1. 이 레포지토리를 적절한 폴더에 clone합니다.
 2. `pip install -r requirements.txt` 명령어를 통해 필요한 pip 패키지를 설치합니다
 3. `git checkout -b {브랜치명}` 을 통해 새 브랜치를 생성합니다.
-4. 개발하면서 결과물은 `python manage.py runserver` 를 통해 확인할 수 있습니다  
+4. 개발하면서 결과물은 `python manage.py runserver` 를 통해 확인할 수 있습니다
