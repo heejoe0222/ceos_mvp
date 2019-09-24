@@ -37,7 +37,7 @@ body{
    /*height: vh;*/
    /*width: 100vw;*/
   height: auto;
-  background-image: url("images/background.png");
+  background-image: url("image/background.png");
 	background-repeat:no-repeat;
 	background-size:cover;
 	/*background-size: 100%;*/

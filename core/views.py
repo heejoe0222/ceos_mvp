@@ -31,4 +31,4 @@ def cellect(request):
         messages.success(request, "이메일 전송 성공!")
         return HttpResponseRedirect(request.path)
 
-    return render(request, 'core/cellect.html')
+    return render(request, 'core/cellect/cellect.html')
