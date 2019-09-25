@@ -22,6 +22,7 @@ from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('example/', views.example, name='example'),
+    path('example/', views.example, name='example'), #프로젝트명으로 바꿔주기
+    path('cellect/', views.cellect, name='cellect'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
